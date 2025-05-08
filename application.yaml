@@ -1,0 +1,14 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: sops-secrets-demo
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/alejandraRamos/argocd-ksops-demo.git
+    targetRevision: HEAD
+    path: manifest/
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: default
