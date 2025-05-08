@@ -2,6 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: demo-app
+  namespace: default  # Must match SopsSecret namespace
 spec:
   replicas: 1
   selector:
@@ -19,4 +20,4 @@ spec:
             - containerPort: 80
           envFrom:
             - secretRef:
-                  name: my-app-secret
+                name: my-app-secret  # Must match secretTemplates.name in SopsSecret
