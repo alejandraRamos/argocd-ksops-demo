@@ -1,0 +1,24 @@
+# Configuración para montar el secret como archivo
+secretsAsFiles:
+  - mountPath: /etc/sops-age-key-file
+    name: sops-age-key-file
+    secretName: sops-age-key-file
+
+# Configuración de variables de entorno
+extraEnv:
+  - name: SOPS_AGE_KEY_FILE
+    value: /etc/sops-age-key-file/key
+
+# Si necesitas montar el directorio de configuración completo
+extraVolumeMounts:
+  - name: sops-age-config
+    mountPath: /home/nonroot/.config/sops/age
+    readOnly: true
+
+extraVolumes:
+  - name: sops-age-config
+    secret:
+      secretName: sops-age-key-file
+      items:
+        - key: key
+          path: keys.txt

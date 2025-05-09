@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: demo-app
+  name: demo-app-service
+spec:
+  ports:
+  - port: 80 #change to 80
+    protocol: TCP
+    targetPort: 3000 #change to 80
+  selector:
+    app: demo-app
+  type: NodePort

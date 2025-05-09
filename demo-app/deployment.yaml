@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: demo-app
+  name: demo-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: demo-app
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: demo-app
+    spec:
+      containers:
+      - image: alejandraramos/demo:1e2d940
+        name: demo-app
+        ports: 
+          - containerPort: 80
+        envFrom:
+          - configMapRef:
+              name: demo-app-env
+          - secretRef:
+                name: demo-app-secret
+              
